@@ -1,7 +1,7 @@
-import sys
 import os
-from os.path import isfile
+import sys
 
+path = ".check"
 
 def main():
     args = parse_args()
@@ -37,7 +37,15 @@ def parse_args():
     return args
 
 def init():
-    return
+    if check_if_file_exist() is True:
+        print("File already exist in this directory. \n Do you want to recreate a new file? Y/N")
+        if input().upper() == "Y":
+            create_file()
+        else:
+            return
+    else:
+        create_file()
+
 def add(args):
     print(f"Adding files for tracking: {args.path}")
 
@@ -45,7 +53,31 @@ def remove(args):
     print(f"Removing files from tracking: {args.path}")
 
 def status():
-    print("Showing status of tracked files...")
+    if check_if_file_exist() is False:
+        print("File .check doesnt exist. Run 'check.py init' first!")
+        return
+    else:
+        with open(".check", "r") as file:
+            lines = file.readlines()
+
+        ok, change, error = 0, 0, 0
+        for line in lines:
+            file_path, _, saved_hash = line.strip().split(",")
+            if not os.path.exists(file_path):
+                print(f"[ERROR] Soubor nebyl nalezen: {file_path}")
+                error += 1
+            else:
+                current_hash = "FUNKCE PRO HASH"
+                if current_hash == saved_hash:
+                    print(f"[OK] {saved_hash} {file_path}")
+                    ok += 1
+                else:
+                    print(f"[CHANGE] {saved_hash} {file_path}")
+                    print(f"NEW HASH: {current_hash}")
+                    change += 1
+
+        print(f"\nSummary: {ok} OK, {change} CHANGE, {error} ERROR")
+
 
 def print_help():
     bold = "\033[1m"
@@ -75,6 +107,17 @@ Examples:
     {cyan}python check.py add "*.txt"{reset}
     {cyan}python check.py status{reset}
 """)
+
+def check_if_file_exist():
+    if os.path.isfile(path) is True:
+        return True
+    else:
+        return False
+
+def create_file():
+    with open(".check", "w") as file:
+        file.write("")
+    print("File .check was created!")
 
 if __name__ == "__main__":
     main()

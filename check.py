@@ -28,7 +28,7 @@ def parse_args():
 
     args = Args()
 
-    argv = sys.argv[1:] #odebere z argumentu název souboru a do pole hodí pouze command a cestu pokud existují
+    argv = sys.argv[1:]
     if len(argv) > 0:
         args.command = argv[0]
         if len(argv) > 1:
@@ -50,7 +50,30 @@ def add(args):
     print(f"Adding files for tracking: {args.path}")
 
 def remove(args):
-    print(f"Removing files from tracking: {args.path}")
+    if not args.path:
+        print("Error: Path is not specified.")
+        return
+
+    if not check_if_file_exist():
+        print("Error: .check file does not exist. Run 'check.py init' first!")
+        return
+
+    with open(".check", "r") as file:
+        lines = file.readlines()
+
+    file_found = False
+    with open(".check", "w") as file:
+        for line in lines:
+            file_path, _ = line.strip().split(",")
+            if file_path != args.path:
+                file.write(line) 
+            else:
+                file_found = True
+
+    if file_found:
+        print(f"Removed: {args.path} from tracking.")
+    else:
+        print(f"Removing file from tracking: {args.path}")
 
 def status():
     if check_if_file_exist() is False:

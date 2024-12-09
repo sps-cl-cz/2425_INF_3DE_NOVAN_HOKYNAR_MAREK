@@ -1,5 +1,5 @@
-<<<<<<< Updated upstream
-=======
+
+
 import os
 import sys
 
@@ -49,6 +49,7 @@ def init():
         create_file()
 
 def add(args):
+
     if not args.path:
         print("Error: No path specified.")
         return
@@ -60,6 +61,8 @@ def add(args):
             print(f"Added: {args.path} (SHA-1: {hash})")
         else:
             print(f"Error: File not found - {args.path}")
+   print(f"Adding files for tracking: {args.path}")
+
 
 def remove(args):
     print(f"Removing files from tracking: {args.path}")
@@ -131,9 +134,13 @@ def create_file():
         file.write("")
     print("File .check was created!")
 
+
 def compute_sha1():
     return
 
 if __name__ == "__main__":
     main()
->>>>>>> Stashed changes
+
+
+if __name__ == "__main__":
+    main()

@@ -46,6 +46,9 @@ def init():
     else:
         create_file()
 
+def add(args):
+    print(f"Adding files for tracking: {args.path}")
+
 def remove(args):
     if not args.path:
         print("Error: Path is not specified.")
@@ -61,7 +64,7 @@ def remove(args):
     file_found = False
     with open(".check", "w") as file:
         for line in lines:
-            file_path, _ = line.strip().split(" ")
+            file_path, _ = line.strip().split(",")
             if file_path != args.path:
                 file.write(line) 
             else:

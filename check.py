@@ -139,5 +139,5 @@ def create_file():
         file.write("")
     print("File .check was created!")
 
-if name == "main":
+if __name__ == "__main__":
     main()

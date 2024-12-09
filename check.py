@@ -1,5 +1,16 @@
 import os
 import sys
+import hashlib
+
+def compute_sha1(filepath):
+    sha1 = hashlib.sha1()
+    try:
+        with open(filepath, "rb") as f:
+            while chunk := f.read(8192):
+                sha1.update(chunk)
+    except FileNotFoundError:
+        return None
+    return sha1.hexdigest()
 
 path = ".check"
 
@@ -47,7 +58,17 @@ def init():
         create_file()
 
 def add(args):
-    print(f"Adding files for tracking: {args.path}")
+    if not args.path:
+        print("Error: No path specified.")
+        return
+
+    with open(".check", "a") as f:
+        if os.path.isfile(args.path):
+            hash = compute_sha1(args.path)
+            f.write(f"{args.path} {hash}\n")
+            print(f"Added: {args.path} (SHA-1: {hash})")
+        else:
+            print(f"Error: File not found - {args.path}")
 
 def remove(args):
     print(f"Removing files from tracking: {args.path}")
@@ -119,5 +140,9 @@ def create_file():
         file.write("")
     print("File .check was created!")
 
+def compute_sha1():
+    return
+
 if __name__ == "__main__":
     main()
+

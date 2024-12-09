@@ -139,9 +139,5 @@ def create_file():
         file.write("")
     print("File .check was created!")
 
-
-def compute_sha1():
-    return
-
 if name == "main":
     main()

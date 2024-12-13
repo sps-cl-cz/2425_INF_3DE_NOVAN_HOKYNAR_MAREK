@@ -80,7 +80,7 @@ python check.py remove myfile.txt
 ```
 ## Tests and limitations of the program ⚠️
 
-Runned tests and possible/known limitations that this program has are listed in [TESTS](TESTS).
+Runned tests and possible/known limitations that this program has are listed in [TESTS](TESTS.md).
 
 ## Conclusion 🎉
 

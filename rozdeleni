@@ -1,4 +1,10 @@
 # Rozdělení
-- Novan   100
+- Novan   180
 - Hokynář 100
-- Marek   100
+- Marek   20
+
+Důvod proč Radim Marek má pouze 20 bodů je následující:
+ - Jedinou práci co měl byla vytvořit logiku pro argument "add" a měl na to čas do čtvrtka, den před termínem projektu.
+ - Sice si otevřel pull request ale kód který tam vložil byla prakticky copy-paste z chatgpt a k tomu bez kontroly toho zda tam jsou errory či ne.
+ - odkaz na pull request: https://github.com/sps-cl-cz/2425_INF_3DE_NOVAN_HOKYNAR_MAREK/pull/6
+ - za "snahu" jsem proto přidělil alespoň 20 bodů i když do práce vlastně nepřispěl
